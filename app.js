@@ -1,32 +1,43 @@
 // Difine UI Vars
-const form = document.querySelector('#task-form');
-const taskList = document.querySelector('.collection');
-const clearBtn = document.querySelector('.clear-task');
-const filter = document.querySelector('#filter');
-const taskInput = document.querySelector('#task');
+const form = document.querySelector("#task-form");
+const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-tasks");
+const filter = document.querySelector("#filter");
+const taskInput = document.querySelector("#task");
 
-// Load all event listeners 
+//Load all event listeners
+loadEventListeners();
+
+// Load all event listeners
 function loadEventListeners() {
-  //Add task event
-  form.addEventListener('submit', addTask);
+	//Add task event
+	form.addEventListener("submit", addTask);
 }
 // Add Task
 function addTask(e) {
-  if (taskInput.value=== ''){
-    alert('Add a task');
-  }
+	if (taskInput.value === " ") {
+		alert("Add a task");
+	}
 
-  //Create li element
-  const li = document.createElement('li');
+	//Create li element
+	const li = document.createElement("li");
+	// add name
+	li.className = "collection-item";
+	// create text node and apend to li
+	li.appendChild(document.createTextNode(taskInput.value));
+	// Create new link element
+	const link = document.createElement("a");
+	//Add class
+	link.className = "delete-item secondary-content";
+	// Add icon html
+	link.innerHTML = '<i class="fa fa-remove"></i>';
+	// Append li to ul
+	li.appendChild(link);
 
-  li.className = 'collection-item'
-  // create tect node and apend to li
-  li.appendChild(document.createTextNode(taskInput.value));
-   // Create new link element
-   const link = document.createElement('a');
-   //Add class 
-   link.className = 'delete-item secondary-content';
-   // Add icon html
-   link.innerHTML = '<i class="fa fa-remove"></i>';
-  e.preventDefault();
+	taskList.appendChild(li);
+
+	//Clear input
+	taskInput.value = ' ';
+
+	e.preventDefault();
 }
